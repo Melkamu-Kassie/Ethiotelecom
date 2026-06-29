@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ethio telecom — Connecting Ethiopia, Empowering Lives</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --bg:#08160f;
+    --bg-2:#0c1f15;
+    --surface:#102a1c;
+    --surface-2:#163324;
+    --border:rgba(255,200,80,0.10);
+    --border-2:rgba(0,217,126,0.18);
+    --fg:#f3eede;
+    --fg-dim:#cdd8ce;
+    --muted:#7e9787;
+    --green:#10e07a;
+    --green-2:#0bb865;
+    --green-deep:#066e3c;
+    --gold:#ffb627;
+    --gold-2:#f59e0b;
+    --red:#e63946;
+    --glow:rgba(16,224,122,0.45);
+    --glow-gold:rgba(255,182,39,0.4);
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--fg);
+    font-family:'Manrope',sans-serif;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(16,224,122,0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255,182,39,0.06), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 0% 80%, rgba(230,57,70,0.04), transparent 60%);
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity:0.7;mix-blend-mode:overlay;
+  }
+  .font-display{font-family:'Sora',sans-serif;letter-spacing:-0.02em}
+  .font-mono{font-family:'JetBrains Mono',monospace}
+  .container-x{max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+
+  /* Top promo strip */
+  .promo{
+    background:linear-gradient(90deg,var(--green-deep),#0a8f53,var(--green-deep));
+    color:#061a10;font-size:13px;font-weight:600;
+    overflow:hidden;position:relative;
+  }
+  .promo-track{display:flex;gap:48px;white-space:nowrap;animation:marquee 35s linear infinite;padding:8px 0}
+  .promo-track span{display:inline-flex;align-items:center;gap:8px}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* Nav */
+  nav.top{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    background:rgba(8,22,15,0.72);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-link{position:relative;color:var(--fg-dim);font-weight:500;font-size:14px;transition:color .25s}
+  .nav-link:hover{color:var(--green)}
+  .nav-link::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--green);transition:width .3s}
+  .nav-link:hover::after{width:100%}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:12px;font-weight:600;font-size:14px;
+    transition:all .25s;cursor:pointer;border:none;font-family:'Manrope',sans-serif;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--green),var(--green-2));
+    color:#061a10;box-shadow:0 8px 28px -8px var(--glow);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px -8px var(--glow)}
+  .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border-2)}
+  .btn-ghost:hover{background:rgba(16,224,122,0.08);border-color:var(--green)}
+
+  /* Hero */
+  .hero{position:relative;padding:60px 0 80px;min-height:88vh;display:flex;align-items:center}
+  #netCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0.95}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;position:relative;z-index:3}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:24px}}
+  .hero h1{font-size:clamp(40px,6.5vw,86px);line-height:0.98;font-weight:800;margin:0 0 24px}
+  .hero h1 .accent{
+    background:linear-gradient(120deg,var(--green) 20%,var(--gold) 80%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero h1 .outline{
+    -webkit-text-stroke:1.5px var(--green);color:transparent;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;padding:6px 14px;
+    border:1px solid var(--border-2);border-radius:999px;
+    background:rgba(16,224,122,0.06);font-size:12px;font-weight:600;
+    color:var(--green);letter-spacing:0.08em;text-transform:uppercase;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+  .hero-side{position:relative}
+  .live-card{
+    background:rgba(16,42,28,0.7);backdrop-filter:blur(20px);
+    border:1px solid var(--border-2);border-radius:20px;padding:24px;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.5);
+  }
+  .live-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.06)}
+  .live-row:last-child{border-bottom:none}
+  .live-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+  .live-val{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--fg);font-weight:500}
+  .live-val.green{color:var(--green)}
+  .live-val.gold{color:var(--gold)}
+
+  /* Stats bar */
+  .stats-bar{
+    background:linear-gradient(180deg,var(--bg-2),var(--bg));
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    padding:48px 0;
+  }
+  .stat{text-align:center;padding:0 12px}
+  .stat-num{font-family:'Sora',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1}
+  .stat-num .unit{font-size:0.5em;color:var(--green);margin-left:4px}
+  .stat-label{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:8px}
+
+  /* Section heading */
+  .section{padding:100px 0;position:relative}
+  .section-head{max-width:780px;margin-bottom:56px}
+  .section h2{font-family:'Sora',sans-serif;font-size:clamp(32px,4.5vw,56px);font-weight:700;line-height:1.05;margin:16px 0 0}
+  .section-sub{color:var(--muted);font-size:17px;line-height:1.6;margin-top:20px;max-width:640px}
+
+  /* Service cards */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:900px){.svc-grid{grid-template-columns:1fr}}
+  .svc-card{
+    position:relative;background:var(--surface);
+    border:1px solid var(--border);border-radius:20px;padding:32px;
+    overflow:hidden;transition:all .35s cubic-bezier(.2,.7,.2,1);
+    min-height:280px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .svc-card::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(16,224,122,0.15),transparent 50%);
+    opacity:0;transition:opacity .35s;
+  }
+  .svc-card:hover{transform:translateY(-4px);border-color:var(--border-2)}
+  .svc-card:hover::before{opacity:1}
+  .svc-icon{
+    width:54px;height:54px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;font-size:22px;
+    background:linear-gradient(135deg,rgba(16,224,122,0.15),rgba(255,182,39,0.08));
+    border:1px solid var(--border-2);color:var(--green);
+    margin-bottom:20px;
+  }
+  .svc-card h3{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;margin:0 0 10px}
+  .svc-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 20px}
+  .svc-link{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:600;font-size:13px;text-decoration:none}
+  .svc-link i{transition:transform .25s}
+  .svc-card:hover .svc-link i{transform:translateX(4px)}
+  .svc-tag{position:absolute;top:24px;right:24px;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 10px;border-radius:999px;text-transform:uppercase}
+  .tag-new{background:rgba(255,182,39,0.15);color:var(--gold);border:1px solid rgba(255,182,39,0.3)}
+  .tag-5g{background:rgba(230,57,70,0.12);color:#ff6b75;border:1px solid rgba(230,57,70,0.3)}
+
+  /* Coverage Map */
+  .map-wrap{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:24px;padding:32px;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:32px;
+    position:relative;overflow:hidden;
+  }
+  @media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
+  .map-svg-wrap{position:relative;aspect-ratio:1.1/1;background:radial-gradient(ellipse at center,rgba(16,224,122,0.05),transparent 70%);border-radius:16px}
+  .map-info{display:flex;flex-direction:column;gap:16px}
+  .region-stat{
+    background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:18px;
+    transition:all .25s;cursor:pointer;
+  }
+  .region-stat:hover{border-color:var(--border-2);transform:translateX(4px)}
+  .region-stat.active{border-color:var(--green);background:rgba(16,224,122,0.05)}
+  .region-stat .name{font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+  .region-stat .name i{color:var(--green)}
+  .region-stat .meta{font-size:12px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace}
+  .coverage-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:10px;overflow:hidden}
+  .coverage-bar > div{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:2px;transition:width 1s}
+
+  .map-region{fill:rgba(16,224,122,0.08);stroke:rgba(16,224,122,0.3);stroke-width:1;transition:all .3s;cursor:pointer}
+  .map-region:hover{fill:rgba(16,224,122,0.2);stroke:var(--green)}
+  .map-region.active{fill:rgba(255,182,39,0.18);stroke:var(--gold)}
+  .map-node{fill:var(--green);filter:drop-shadow(0 0 6px var(--green))}
+  .map-node.gold{fill:var(--gold);filter:drop-shadow(0 0 6px var(--gold))}
+  .map-pulse{fill:none;stroke:var(--green);stroke-width:1.5;opacity:0;transform-origin:center;transform-box:fill-box;animation:mapPulse 2.5s infinite}
+  @keyframes mapPulse{0%{opacity:0.8;transform:scale(0.3)}100%{opacity:0;transform:scale(2.5)}}
+
+  /* Plans */
+  .plan-tabs{display:flex;gap:8px;background:var(--surface);padding:6px;border-radius:14px;border:1px solid var(--border);width:fit-content;margin-bottom:32px;flex-wrap:wrap}
+  .plan-tab{padding:10px 22px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .25s;border:none;background:transparent;font-family:inherit}
+  .plan-tab.active{background:linear-gradient(135deg,var(--green),var(--green-2));color:#061a10}
+  .plan-tab:hover:not(.active){color:var(--fg)}
+  .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:900px){.plans-grid{grid-template-columns:1fr}}
+  .plan-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;
+    position:relative;transition:all .3s;
+  }
+  .plan-card:hover{transform:translateY(-4px);border-color:var(--border-2)}
+  .plan-card.featured{border-color:var(--gold);background:linear-gradient(180deg,rgba(255,182,39,0.05),var(--surface))}
+  .plan-card.featured::before{content:"Most Popular";position:absolute;top:-12px;left:32px;background:var(--gold);color:#1a0f00;font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;letter-spacing:0.06em;text-transform:uppercase}
+  .plan-name{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}
+  .plan-price{font-family:'Sora',sans-serif;font-size:48px;font-weight:800;margin:12px 0 4px}
+  .plan-price .currency{font-size:0.4em;color:var(--green);margin-right:6px;font-weight:600}
+  .plan-period{font-size:13px;color:var(--muted);margin-bottom:24px}
+  .plan-features{list-style:none;padding:0;margin:0 0 28px}
+  .plan-features li{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px;color:var(--fg-dim);border-bottom:1px dashed rgba(255,255,255,0.06)}
+  .plan-features li:last-child{border-bottom:none}
+  .plan-features i{color:var(--green);font-size:12px}
+  .plan-card.featured .plan-features i{color:var(--gold)}
+  .plan-btn{width:100%;justify-content:center}
+
+  /* Recharge simulator */
+  .recharge-wrap{
+    background:linear-gradient(135deg,var(--surface),var(--bg-2));
+    border:1px solid var(--border);border-radius:24px;padding:40px;
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;
+    position:relative;overflow:hidden;
+  }
+  @media(max-width:900px){.recharge-wrap{grid-template-columns:1fr;padding:28px}}
+  .recharge-wrap::before{
+    content:"";position:absolute;top:-50%;right:-20%;width:60%;height:200%;
+    background:radial-gradient(ellipse,rgba(16,224,122,0.08),transparent 60%);
+    pointer-events:none;
+  }
+  .form-group{margin-bottom:18px;position:relative}
+  .form-label{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:600;margin-bottom:8px}
+  .form-input{
+    width:100%;background:var(--bg);border:1px solid var(--border);
+    border-radius:12px;padding:14px 16px;color:var(--fg);font-size:15px;
+    font-family:'Manrope',sans-serif;transition:all .25s;
+  }
+  .form-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(16,224,122,0.12)}
+  .form-input::placeholder{color:var(--muted)}
+  .amount-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .chip{padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--fg-dim);cursor:pointer;transition:all .2s;font-family:'JetBrains Mono',monospace}
+  .chip:hover{border-color:var(--green);color:var(--green)}
+  .chip.active{background:var(--green);color:#061a10;border-color:var(--green);font-weight:600}
+  .breakdown{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;z-index:1}
+  .breakdown h4{font-family:'Sora',sans-serif;font-size:18px;margin:0 0 20px;font-weight:600}
+  .bd-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.06);font-size:14px}
+  .bd-row:last-of-type{border-bottom:none}
+  .bd-row .lbl{color:var(--muted)}
+  .bd-row .val{font-family:'JetBrains Mono',monospace;color:var(--fg)}
+  .bd-total{margin-top:16px;padding-top:16px;border-top:2px solid var(--border-2);display:flex;justify-content:space-between;align-items:center}
+  .bd-total .lbl{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:600}
+  .bd-total .val{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:var(--green)}
+  .receipt-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:16px;text-align:center;letter-spacing:0.04em}
+
+  /* Speed test */
+  .speed-wrap{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:24px;padding:48px;text-align:center;position:relative;overflow:hidden;
+  }
+  .gauge{
+    width:280px;height:280px;margin:0 auto 32px;position:relative;
+  }
+  .gauge svg{transform:rotate(-90deg)}
+  .gauge-bg{stroke:rgba(255,255,255,0.06);stroke-width:14;fill:none}
+  .gauge-fill{stroke:url(#gaugeGrad);stroke-width:14;fill:none;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+  .gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .gauge-val{font-family:'Sora',sans-serif;font-size:56px;font-weight:800;line-height:1}
+  .gauge-unit{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px}
+  .speed-status{font-size:14px;color:var(--muted);margin-bottom:24px;min-height:20px}
+  .speed-status.active{color:var(--green)}
+  .speed-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:600px;margin:0 auto}
+  .speed-stat{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px}
+  .speed-stat .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+  .speed-stat .val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;margin-top:6px;color:var(--fg)}
+  .speed-stat .val.green{color:var(--green)}
+  .speed-stat .val.gold{color:var(--gold)}
+
+  /* App showcase */
+  .app-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  @media(max-width:900px){.app-wrap{grid-template-columns:1fr;gap:40px}}
+  .phone{
+    width:300px;height:600px;margin:0 auto;position:relative;
+    background:linear-gradient(135deg,#1a1a1a,#0a0a0a);
+    border-radius:42px;padding:14px;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05);
+  }
+  .phone::before{
+    content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);
+    width:120px;height:28px;background:#000;border-radius:0 0 18px 18px;z-index:2;
+  }
+  .phone-screen{
+    width:100%;height:100%;background:linear-gradient(180deg,#0a1f14,#061a10);
+    border-radius:30px;overflow:hidden;position:relative;
+  }
+  .ph-status{display:flex;justify-content:space-between;padding:18px 24px 8px;font-size:11px;color:var(--fg);font-weight:600;font-family:'JetBrains Mono',monospace}
+  .ph-status .icons{display:flex;gap:6px;align-items:center}
+  .ph-header{padding:16px 20px 8px;display:flex;justify-content:space-between;align-items:center}
+  .ph-brand{font-family:'Sora',sans-serif;font-weight:700;font-size:14px;color:var(--green)}
+  .ph-balance{margin:8px 20px 16px;padding:18px;background:linear-gradient(135deg,var(--green-deep),#0a8f53);border-radius:16px;position:relative;overflow:hidden}
+  .ph-balance::after{content:"";position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(255,255,255,0.15),transparent 70%)}
+  .ph-bal-lbl{font-size:10px;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}
+  .ph-bal-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-top:4px}
+  .ph-bal-sub{font-size:10px;color:rgba(255,255,255,0.7);margin-top:4px}
+  .ph-usage{margin:0 20px 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ph-usage-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px}
+  .ph-usage-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+  .ph-usage-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;margin-top:4px;color:var(--fg)}
+  .ph-usage-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:8px;overflow:hidden}
+  .ph-usage-bar > div{height:100%;background:var(--green);border-radius:2px}
+  .ph-actions{margin:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ph-action{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;background:rgba(255,255,255,0.04);border-radius:12px;font-size:9px;color:var(--fg-dim);text-align:center}
+  .ph-action i{width:30px;height:30px;border-radius:8px;background:rgba(16,224,122,0.15);display:flex;align-items:center;justify-content:center;color:var(--green);font-size:13px}
+  .ph-tx{margin:14px 20px 0}
+  .ph-tx-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;margin-bottom:8px}
+  .ph-tx-item{display:flex;justify-content:space-between;padding:6px 0;font-size:11px;color:var(--fg-dim)}
+  .ph-tx-item .amt{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:600}
+
+  .feature-list{list-style:none;padding:0;margin:32px 0 0}
+  .feature-list li{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px dashed rgba(255,255,255,0.06)}
+  .feature-list li:last-child{border-bottom:none}
+  .feature-list .ic{width:36px;height:36px;border-radius:10px;background:rgba(16,224,122,0.1);display:flex;align-items:center;justify-content:center;color:var(--green);flex-shrink:0}
+  .feature-list .txt{font-size:14px;color:var(--fg-dim);line-height:1.5}
+  .feature-list .txt strong{color:var(--fg);font-weight:600;display:block;margin-bottom:2px}
+
+  /* Footer */
+  footer{background:var(--bg-2);border-top:1px solid var(--border);padding:80px 0 32px;margin-top:60px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+  @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  .footer-brand{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;margin-bottom:16px}
+  .footer-brand .green{color:var(--green)}
+  .footer-col h5{font-size:13px;text-transform:uppercase;letter-spacing:0.08em;color:var(--fg);margin:0 0 16px;font-weight:700}
+  .footer-col a{display:block;color:var(--muted);font-size:14px;text-decoration:none;padding:6px 0;transition:color .2s}
+  .footer-col a:hover{color:var(--green)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);flex-wrap:wrap;gap:16px}
+  .social{display:flex;gap:12px}
+  .social a{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--fg-dim);transition:all .2s}
+  .social a:hover{background:var(--green);color:#061a10;border-color:var(--green)}
+
+  /* Newsletter */
+  .newsletter{background:linear-gradient(135deg,rgba(16,224,122,0.08),rgba(255,182,39,0.04));border:1px solid var(--border-2);border-radius:20px;padding:32px;margin-bottom:48px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+  @media(max-width:900px){.newsletter{grid-template-columns:1fr}}
+  .newsletter h3{font-family:'Sora',sans-serif;font-size:24px;font-weight:700;margin:0 0 8px}
+  .newsletter p{color:var(--muted);font-size:14px;margin:0}
+  .news-form{display:flex;gap:8px}
+  .news-form input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--fg);font-size:14px;font-family:inherit}
+  .news-form input:focus{outline:none;border-color:var(--green)}
+  .news-form button{padding:12px 20px}
+
+  /* Toast */
+  .toast-wrap{position:fixed;top:90px;right:24px;z-index:100;display:flex;flex-direction:column;gap:12px;pointer-events:none}
+  .toast{
+    background:rgba(16,42,28,0.95);backdrop-filter:blur(20px);
+    border:1px solid var(--border-2);border-radius:14px;padding:14px 20px;
+    color:var(--fg);font-size:14px;font-weight:500;
+    box-shadow:0 12px 32px -8px rgba(0,0,0,0.5);
+    display:flex;align-items:center;gap:12px;min-width:280px;
+    transform:translateX(120%);transition:transform .4s cubic-bezier(.2,.8,.2,1);
+    pointer-events:auto;
+  }
+  .toast.show{transform:translateX(0)}
+  .toast i{color:var(--green);font-size:18px}
+  .toast.error i{color:var(--red)}
+
+  /* Scroll reveal */
+  .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* Scroll progress */
+  .scroll-prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--green),var(--gold));z-index:100;width:0;transition:width .15s}
+
+  /* Mobile menu */
+  .menu-btn{display:none;background:transparent;border:none;color:var(--fg);font-size:22px;cursor:pointer}
+  @media(max-width:900px){
+    .menu-btn{display:block}
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg-2);flex-direction:column;padding:20px;border-bottom:1px solid var(--border);gap:0}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:14px 0;border-bottom:1px solid var(--border)}
+  }
+  .nav-inner{position:relative}
+
+  /* Back to top */
+  .back-top{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:14px;background:var(--green);color:#061a10;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:16px;z-index:40;box-shadow:0 8px 24px -6px var(--glow);transition:all .25s}
+  .back-top.show{display:flex}
+  .back-top:hover{transform:translateY(-2px);box-shadow:0 12px 28px -6px var(--glow)}
+
+  /* Auth Modals and Portal Styling */
+  .auth-modal{position:fixed;inset:0;z-index:100;background:rgba(5,14,10,0.85);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px}
+  .auth-modal.open{display:flex}
+  .auth-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:36px;width:100%;max-width:440px;box-shadow:0 24px 70px -15px rgba(0,0,0,0.7);position:relative}
+  .password-meter{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:6px;overflow:hidden}
+  .password-meter-bar{height:100%;width:0;transition:all 0.3s;background:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="scroll-prog" id="scrollProg"></div>
+
+<div class="promo">
+  <div class="promo-track" id="promoTrack">
+    <span><i class="fas fa-bolt"></i> 5G Commercial Network Live in 12 Cities</span>
+    <span><i class="fas fa-star"></i> Double Data Bonus on all Telebirr Top-ups</span>
+    <span><i class="fas fa-shield"></i> Reaching 78 Million Connected Lives Everyday</span>
+    <span><i class="fas fa-bolt"></i> 5G Commercial Network Live in 12 Cities</span>
+  </div>
+</div>
+
+<nav class="top">
+  <div class="container-x py-4 flex items-center justify-between nav-inner">
+    <div class="flex items-center gap-12">
+      <a href="#" class="font-display text-2xl font-extrabold tracking-tight" style="color:var(--fg)">
+        ethio<span style="color:var(--green)">telecom</span>
+      </a>
+      <div class="hidden lg:flex items-center gap-8 nav-links" id="navLinks">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#coverage" class="nav-link">Coverage</a>
+        <a href="#plans" class="nav-link">Plans</a>
+        <a href="#simulator" class="nav-link">Simulator</a>
+        <a href="#speed" class="nav-link">Speed Test</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="btn btn-ghost px-5 py-2.5 rounded-xl text-sm" id="loginNavBtn" onclick="openAuthModal('login')">Log In</button>
+      <button class="btn btn-primary px-5 py-2.5 rounded-xl text-sm" id="signUpNavBtn" onclick="openAuthModal('signup')">Sign Up</button>
+      <div class="hidden items-center gap-3" id="userProfileActive">
+        <span class="font-mono text-xs text-emerald-400 bg-emerald-950/50 border border-emerald-800/30 px-3 py-1.5 rounded-lg">
+          <i class="fas fa-user-circle mr-1.5"></i><span id="portalUserName">Account</span>
+        </span>
+        <button class="text-xs text-rose-400 hover:underline cursor-pointer" onclick="handleLogout()"><i class="fas fa-power-off"></i></button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero overflow-hidden">
+  <canvas id="netCanvas"></canvas>
+  <div class="container-x w-full">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="eyebrow mb-6"><span class="dot"></span> Next-gen connectivity</div>
+        <h1 class="font-display">Ethiopia's <br><span class="accent">Digital Backbone</span><br><span class="outline">Is Live.</span></h1>
+        <p class="text-lg md:text-xl text-slate-400 leading-relaxed mb-8 max-width[540px]" style="color:var(--fg-dim)">
+          Empowering enterprise hubs, transforming mobile commerce via telebirr, and building high-speed infrastructure from the mountains to the valleys.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#simulator" class="btn btn-primary"><i class="fas fa-sim-card"></i> Quick Top-up</a>
+          <a href="#plans" class="btn btn-ghost">Explore Packages <i class="fas fa-arrow-right text-xs"></i></a>
+        </div>
+        <div class="mt-12 flex flex-wrap gap-8 text-slate-500 font-semibold text-sm">
+          <div class="flex items-center gap-2"><i class="fas fa-shield-halved" style="color:var(--green)"></i> Trusted by 78M+ users</div>
+          <div class="flex items-center gap-2"><i class="fas fa-tower-cell" style="color:var(--gold)"></i> 18,000+ sites</div>
+        </div>
+      </div>
+      <div class="hero-side reveal">
+        <div class="live-card">
+          <div class="flex items-center justify-between mb-4">
+            <div class="text-xs uppercase tracking-widest font-semibold" style="color:var(--muted)">Live Network</div>
+            <div class="flex items-center gap-2 text-xs" style="color:var(--green)"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);display:inline-block;animation:pulse 2s infinite"></span> Real-time</div>
+          </div>
+          <div class="live-row">
+            <span class="live-label">Active Subscribers</span>
+            <span class="live-val green" id="liveSubs">78,432,910</span>
+          </div>
+          <div class="live-row">
+            <span class="live-label">Data Throughput</span>
+            <span class="live-val" id="liveThroughput">2.41 Tbps</span>
+          </div>
+          <div class="live-row">
+            <span class="live-label">5G Cities Live</span>
+            <span class="live-val gold">12</span>
+          </div>
+          <div class="live-row">
+            <span class="live-label">Calls / second</span>
+            <span class="live-val" id="liveCalls">8,420</span>
+          </div>
+          <div class="live-row">
+            <span class="live-label">Telebirr Users</span>
+            <span class="live-val green">47.1M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="container-x">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="stat reveal">
+        <div class="stat-num"><span data-count="78">0</span><span class="unit">M+</span></div>
+        <div class="stat-label">Subscribers</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num"><span data-count="47">0</span><span class="unit">M+</span></div>
+        <div class="stat-label">telebirr wallets</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num"><span data-count="95">0</span><span class="unit">%</span></div>
+        <div class="stat-label">4G LTE coverage</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num"><span data-count="12">0</span><span class="unit">Cities</span></div>
+        <div class="stat-label">5G operationalized</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="container-x">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span> Consumer & Enterprise</div>
+      <h2>Engineered for every <span style="color:var(--green)">connection</span>.</h2>
+      <p class="section-sub">From individual digital connectivity options to massive corporate network systems, explore tailored tech solutions designed to power production across Ethiopia.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <div>
+          <div class="svc-icon"><i class="fas fa-wallet"></i></div>
+          <span class="svc-tag tag-new">M-Banking</span>
+          <h3>telebirr SuperApp</h3>
+          <p>Send payments, receive global remittances, purchase goods, buy airtime, and execute credit transactions easily inside a unified financial tool with over 1.8 trillion ETB transacted.</p>
+        </div>
+        <a href="#app" class="svc-link">Download app <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="svc-card reveal">
+        <div>
+          <div class="svc-icon"><i class="fas fa-building"></i></div>
+          <h3>Enterprise Solutions</h3>
+          <p>Dedicated bandwidth, MPLS, cloud hosting, IoT and managed services tailored for businesses of every size.</p>
+        </div>
+        <a href="#" class="svc-link">Talk to sales <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="svc-card reveal">
+        <div>
+          <div class="svc-icon"><i class="fas fa-plane-departure"></i></div>
+          <h3>International Roaming</h3>
+          <p>Stay connected in 180+ countries with our global roaming partners. Pre-paid and post-paid roaming available.</p>
+        </div>
+        <a href="#" class="svc-link">View countries <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="coverage" style="background:linear-gradient(180deg,transparent,rgba(16,224,122,0.02),transparent)">
+  <div class="container-x">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span> Network coverage</div>
+      <h2>From <span style="color: green;">Mekelle</span> to <span style="color: gold;">Arba Minch</span>.</h2>
+      <p class="section-sub">Hover or tap a region to see live coverage details. Our 4G network reaches 95% of Ethiopians, with 5G expanding across major cities every quarter.</p>
+    </div>
+    <div class="map-wrap reveal">
+      <div class="map-svg-wrap">
+        <svg id="ethMap" viewBox="0 0 600 540" style="width:100%;height:100%">
+          <path class="map-region active" data-region="addis" d="M 280,240 L 320,240 L 320,270 L 280,270 Z"/>
+          <path class="map-region" data-region="oromia" d="M 220,180 L 380,170 L 410,240 L 460,320 L 360,460 L 290,440 L 250,340 Z"/>
+          <path class="map-region" data-region="amhara" d="M 210,110 L 340,90 L 370,170 L 230,180 Z"/>
+          <path class="map-region" data-region="tigray" d="M 220,40 L 320,30 L 330,90 L 210,100 Z"/>
+          <path class="map-region" data-region="snnpr" d="M 195,355 L 250,340 L 290,440 L 240,490 L 170,410 Z"/>
+          <path class="map-region" data-region="somali" d="M 380,170 L 530,220 L 580,350 L 430,420 L 410,240 Z"/>
+          <path class="map-region" data-region="afar" d="M 320,30 L 390,70 L 410,170 L 340,90 Z"/>
+        </svg>
+      </div>
+      <div class="map-info">
+        <div class="region-stat active" data-region="addis">
+          <div class="name">Addis Ababa <i class="fas fa-location-dot"></i></div>
+          <div class="meta">5G • 4G LTE • 3G • 2G · 99.8% coverage</div>
+          <div class="coverage-bar"><div style="width:99.8%"></div></div>
+        </div>
+        <div class="region-stat" data-region="oromia">
+          <div class="name">Oromia</div>
+          <div class="meta">4G LTE • 3G • 2G · 96.2% coverage</div>
+          <div class="coverage-bar"><div style="width:96.2%"></div></div>
+        </div>
+        <div class="region-stat" data-region="amhara">
+          <div class="name">Amhara</div>
+          <div class="meta">4G LTE • 3G • 2G · 94.5% coverage</div>
+          <div class="coverage-bar"><div style="width:94.5%"></div></div>
+        </div>
+        <div class="region-stat" data-region="tigray">
+          <div class="name">Tigray</div>
+          <div class="meta">4G LTE • 3G • 2G · 91.0% coverage</div>
+          <div class="coverage-bar"><div style="width:91.0%"></div></div>
+        </div>
+        <div class="region-stat" data-region="snnpr">
+          <div class="name">SNNPR</div>
+          <div class="meta">4G LTE • 3G • 2G · 89.7% coverage</div>
+          <div class="coverage-bar"><div style="width:89.7%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="plans">
+  <div class="container-x">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span> Optimized packages</div>
+      <h2>Flexible plans for your lifestyle</h2>
+      <p class="section-sub">Choose among highly competitive data, voice, and composite plans tailored to stay connected under optimal budgets.</p>
+    </div>
+    <div class="plan-tabs reveal">
+      <button class="plan-tab active" data-tab="daily">Daily</button>
+      <button class="plan-tab" data-tab="weekly">Weekly</button>
+      <button class="plan-tab" data-tab="monthly">Monthly</button>
+    </div>
+    <div class="plans-grid reveal" id="plansGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="simulator">
+  <div class="container-x">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="dot"></span> Airtime Simulator</div>
+      <h2>Recharge in a <span style="color:var(--green)">heartbeat</span>.</h2>
+      <p class="section-sub">Test our automated top-up mechanism. Fill out your target mobile coordinates and preferred transaction sizing parameters to preview calculated incentives instantly.</p>
+    </div>
+    <div class="recharge-wrap reveal">
+      <form id="rechargeSimForm" onsubmit="handleRechargeSubmit(event)" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="phoneInput">Mobile Number</label>
+          <input type="tel" id="phoneInput" class="form-input" placeholder="09xxxxxxxx or 07xxxxxxxx" oninput="liveUpdateBreakdown()">
+          <span class="text-xs text-rose-400 mt-1 hidden" id="phoneError">Invalid Ethiopian phone format.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="amountInput">Recharge Sizing (ETB)</label>
+          <input type="number" id="amountInput" class="form-input" placeholder="Enter sizing amount" min="5" max="5000" oninput="liveUpdateBreakdown()">
+          <span class="text-xs text-rose-400 mt-1 hidden" id="amountError">Please specify a threshold from 5 to 5,000 ETB.</span>
+          <div class="amount-chips" id="amountChips">
+            <div class="chip" data-val="25">25 ETB</div>
+            <div class="chip active" data-val="50">50 ETB</div>
+            <div class="chip" data-val="100">100 ETB</div>
+            <div class="chip" data-val="250">250 ETB</div>
+            <div class="chip" data-val="500">500 ETB</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="bonusSelect">Select Incentive Pack</label>
+          <select id="bonusSelect" class="form-input" style="background-color: var(--bg)" onchange="liveUpdateBreakdown()">
+            <option value="0" selected>Standard Core Package (No bonus data)</option>
+            <option value="20">+20% Extra voice allocation (Promo bonus)</option>
+            <option value="50">+50% High-speed data allowance (Weekend pack)</option>
+            <option value="100">+100% Comprehensive double-up matrix (Festive reward)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-full mt-2" style="width:100%;justify-content:center">
+          <i class="fas fa-bolt"></i> Run Simulator
+        </button>
+      </form>
+
+      <div class="breakdown" id="breakdown">
+        <h4><i class="fas fa-receipt" style="color:var(--green);margin-right:8px"></i>Recharge summary</h4>
+        <div class="bd-row"><span class="lbl">Phone number</span><span class="val" id="bdPhone">09xx xxx xxx</span></div>
+        <div class="bd-row"><span class="lbl">Amount</span><span class="val" id="bdAmount">ETB 50.00</span></div>
+        <div class="bd-row"><span class="lbl">VAT (15%)</span><span class="val" id="bdVat">included</span></div>
+        <div class="bd-row"><span class="lbl">Bonus data</span><span class="val" id="bdBonus">+0%</span></div>
+        <div class="bd-row"><span class="lbl">Data allocation</span><span class="val green" id="bdData" style="color:var(--green)">1.5 GB</span></div>
+        <div class="bd-row"><span class="lbl">Validity</span><span class="val">30 days</span></div>
+        <div class="bd-row"><span class="lbl">Payment method</span><span class="val">telebirr</span></div>
+        <div class="bd-total">
+          <span class="lbl">You pay</span>
+          <span class="val" id="bdTotal">ETB 50</span>
+        </div>
+        <div class="receipt-id" id="receiptId">TXN: ET-XXXX-XXXX-XXXX</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="speed">
+  <div class="container-x">
+    <div class="section-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <div class="eyebrow" style="margin:0 auto"><span class="dot"></span> Network speed test</div>
+      <h2>How fast is your <span style="color:var(--green)">connection</span>?</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto">Test your real-time download, upload and latency. See why ethio telecom 5G is the fastest network in Ethiopia.</p>
+    </div>
+    <div class="speed-wrap reveal">
+      <div class="gauge">
+        <svg width="280" height="280" viewBox="0 0 280 280">
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10e07a"/>
+              <stop offset="100%" stop-color="#ffb627"/>
+            </linearGradient>
+          </defs>
+          <circle class="gauge-bg" cx="140" cy="140" r="120"/>
+          <circle class="gauge-fill" id="gaugeFill" cx="140" cy="140" r="120" stroke-dasharray="754" stroke-dashoffset="754"/>
+        </svg>
+        <div class="gauge-center">
+          <div class="gauge-val" id="gaugeVal">0.0</div>
+          <div class="gauge-unit">Mbps</div>
+        </div>
+      </div>
+      <div class="speed-status" id="speedStatus">Click below to initiate link analysis</div>
+      <button class="btn btn-primary" id="speedBtn" onclick="runSpeedTest()"><i class="fas fa-gauge-high"></i> Start Test</button>
+      <div class="speed-stats mt-8">
+        <div class="speed-stat"><div class="lbl">Ping Latency</div><div class="val green" id="statPing">--</div></div>
+        <div class="speed-stat"><div class="lbl">Upload Rate</div><div class="val" id="statUpload">--</div></div>
+        <div class="speed-stat"><div class="lbl">Jitter Variance</div><div class="val gold" id="statJitter">--</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="app">
+  <div class="container-x">
+    <div class="app-wrap">
+      <div class="reveal">
+        <div class="eyebrow"><span class="dot"></span> All-in-one platform</div>
+        <h2>Manage everything inside <span style="color:var(--green)">MyEthio</span>.</h2>
+        <p class="section-sub">Download our unified subscriber client application to inspect active resource thresholds, process rapid wallet utility items, and verify billing logs.</p>
+        <ul class="feature-list">
+          <li>
+            <div class="ic"><i class="fas fa-chart-pie"></i></div>
+            <div class="txt"><strong>Granular Usage Metrics</strong>Monitor voice, high-speed data buckets, and corporate package bounds updated contextually on live server nodes.</div>
+          </li>
+          <li>
+            <div class="ic"><i class="fas fa-wallet"></i></div>
+            <div class="txt"><strong>Integrated telebirr Ecosystem</strong>Liquidate invoices, remit capital to peer accounts, and manage automated utility distributions seamlessly.</div>
+          </li>
+        </ul>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <button class="btn btn-primary"><i class="fab fa-apple"></i> App Store</button>
+          <button class="btn btn-ghost"><i class="fab fa-google-play"></i> Google Play</button>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ph-status">
+              <span>9:41</span>
+              <span class="icons"><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-three-quarters"></i></span>
+            </div>
+            <div class="ph-header">
+              <span class="ph-brand">ethio telecom</span>
+              <i class="fas fa-bell" style="color:var(--gold);font-size:14px"></i>
+            </div>
+            <div class="ph-balance">
+              <div class="ph-bal-lbl">Account balance</div>
+              <div class="ph-bal-val">ETB 245.50</div>
+              <div class="ph-bal-sub">+251 911 234 567 · Active</div>
+            </div>
+            <div class="ph-usage">
+              <div class="ph-usage-card">
+                <div class="ph-usage-lbl">Data</div>
+                <div class="ph-usage-val">8.4 / 15 GB</div>
+                <div class="ph-usage-bar"><div style="width:56%"></div></div>
+              </div>
+              <div class="ph-usage-card">
+                <div class="ph-usage-lbl">Voice</div>
+                <div class="ph-usage-val">142 / 300 min</div>
+                <div class="ph-usage-bar"><div style="width:47%;background:var(--gold)"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="auth-modal" id="signupModal">
+  <div class="auth-card">
+    <button class="absolute top-5 right-5 text-slate-400 hover:text-white" onclick="closeAuthModal('signup')"><i class="fas fa-times text-lg"></i></button>
+    <h3 class="font-display text-xl font-bold mb-2">Create Portal Account</h3>
+    <p class="text-xs text-slate-400 mb-6">Access localized services, advanced tracking, and premium plan operations.</p>
+    
+    <form id="portalSignUpForm" onsubmit="handleSignUpSubmit(event)" novalidate>
+      <div class="form-group mb-4">
+        <label class="form-label text-xs" for="suName">Full Name</label>
+        <input type="text" id="suName" class="form-input py-2.5 text-sm" placeholder="Abebe Bikila">
+        <span class="text-xs text-rose-400 mt-1 hidden" id="suNameError">Name cannot be empty.</span>
+      </div>
+      <div class="form-group mb-4">
+        <label class="form-label text-xs" for="suEmail">Email Address</label>
+        <input type="email" id="suEmail" class="form-input py-2.5 text-sm" placeholder="name@domain.com">
+        <span class="text-xs text-rose-400 mt-1 hidden" id="suEmailError">Please enter a valid email.</span>
+      </div>
+      <div class="form-group mb-4">
+        <label class="form-label text-xs" for="suPhone">Phone Number</label>
+        <input type="tel" id="suPhone" class="form-input py-2.5 text-sm" placeholder="09xxxxxxxx">
+        <span class="text-xs text-rose-400 mt-1 hidden" id="suPhoneError">Provide a valid local subscriber mobile string.</span>
+      </div>
+      <div class="form-group mb-4">
+        <label class="form-label text-xs" for="suPassword">Password</label>
+        <input type="password" id="suPassword" class="form-input py-2.5 text-sm" placeholder="••••••••" oninput="analyzePasswordStrength(this.value)">
+        <div class="password-meter"><div class="password-meter-bar" id="suPasswordBar"></div></div>
+        <span class="text-xs text-rose-400 mt-1 hidden" id="suPasswordError">Must contains minimum 8 elements including symbols & numbers.</span>
+      </div>
+      <button type="submit" class="btn btn-primary w-full mt-4 py-3 rounded-xl text-sm justify-center"><i class="fas fa-user-plus"></i> Initialize Profile</button>
+    </form>
+    <div class="text-center mt-4 text-xs text-slate-400">
+      Already have an account? <span class="text-emerald-400 hover:underline cursor-pointer" onclick="switchAuthModal('signup', 'login')">Log In</span>
+    </div>
+  </div>
+</div>
+
+<div class="auth-modal" id="loginModal">
+  <div class="auth-card">
+    <button class="absolute top-5 right-5 text-slate-400 hover:text-white" onclick="closeAuthModal('login')"><i class="fas fa-times text-lg"></i></button>
+    <h3 class="font-display text-xl font-bold mb-2">Welcome Back</h3>
+    <p class="text-xs text-slate-400 mb-6">Provide registered identifiers to load cloud user profile parameters.</p>
+    
+    <form id="portalLoginForm" onsubmit="handleLoginSubmit(event)" novalidate>
+      <div class="form-group mb-4">
+        <label class="form-label text-xs" for="logEmail">Email Address</label>
+        <input type="email" id="logEmail" class="form-input py-2.5 text-sm" placeholder="name@domain.com">
+        <span class="text-xs text-rose-400 mt-1 hidden" id="logEmailError">Please supply a valid registered email address.</span>
+      </div>
+      <div class="form-group mb-5">
+        <label class="form-label text-xs" for="logPassword">Secure Password</label>
+        <input type="password" id="logPassword" class="form-input py-2.5 text-sm" placeholder="••••••••">
+        <span class="text-xs text-rose-400 mt-1 hidden" id="logPasswordError">Enter password credentials.</span>
+      </div>
+      <button type="submit" class="btn btn-primary w-full py-3 rounded-xl text-sm justify-center"><i class="fas fa-sign-in-alt"></i> Grant Entry</button>
+    </form>
+    <div class="text-center mt-4 text-xs text-slate-400">
+      New user registration? <span class="text-emerald-400 hover:underline cursor-pointer" onclick="switchAuthModal('login', 'signup')">Register Here</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container-x">
+    <div class="newsletter reveal">
+      <div>
+        <h3>Stay in the loop</h3>
+        <p>Get the latest on 5G rollouts, special offers and new services — delivered weekly.</p>
+      </div>
+      <form class="news-form" id="newsForm">
+        <input type="email" placeholder="your.email@example.com" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2024 ethio telecom. All rights reserved. · <a href="#" style="color:var(--green)">Privacy</a> · <a href="#" style="color:var(--green)">Terms</a></div>
+      <div class="social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-wrap" id="toastWrap"></div>
+<button class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+  /* ============================================================
+     1. GLOBAL UTILITIES, COUNT AND SCROLL ANIMATION NODES
+     ============================================================ */
+  function toast(msg,type='success'){
+    const wrap=document.getElementById('toastWrap');
+    const t=document.createElement('div');
+    t.className='toast'+(type==='error'?' error':'');
+    t.innerHTML=`<i class="fas ${type==='error'?'fa-circle-exclamation':'fa-circle-check'}"></i><span>${msg}</span>`;
+    wrap.appendChild(t);
+    requestAnimationFrame(()=>t.classList.add('show'));
+    setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),400); },3500);
+  }
+
+  const promoTrack=document.getElementById('promoTrack');
+  promoTrack.innerHTML+=promoTrack.innerHTML;
+
+  const menuBtn=document.getElementById('menuBtn');
+  const navLinks=document.getElementById('navLinks');
+  menuBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+
+  const scrollProg=document.getElementById('scrollProg');
+  const backTop=document.getElementById('backTop');
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement.scrollHeight-window.innerHeight;
+    const p=(window.scrollY/h)*100;
+    scrollProg.style.width=p+'%';
+    backTop.classList.toggle('show',window.scrollY>600);
+  });
+  backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  const revealObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+  const counterObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target; const target=+el.dataset.count; const dur=1800; const start=performance.now();
+        function tick(now){
+          const t=Math.min((now-start)/dur,1); const eased=1-Math.pow(1-t,3); el.textContent=Math.floor(eased*target).toLocaleString();
+          if(t<1) requestAnimationFrame(tick); else el.textContent=target.toLocaleString();
+        }
+        requestAnimationFrame(tick); counterObs.unobserve(el);
+      }
+    });
+  },{threshold:0.4});
+  document.querySelectorAll('[data-count]').forEach(el=>counterObs.observe(el));
+
+  let baseSubs=78432910; let baseCalls=8420; let baseThroughput=2.41;
+  setInterval(()=>{
+    baseSubs+=Math.floor(Math.random()*40)-15; baseCalls+=Math.floor(Math.random()*60)-30; baseThroughput+=(Math.random()*0.08-0.04);
+    document.getElementById('liveSubs').textContent=baseSubs.toLocaleString();
+    document.getElementById('liveCalls').textContent=baseCalls.toLocaleString();
+    document.getElementById('liveThroughput').textContent=Math.max(2.1, baseThroughput).toFixed(2)+' Tbps';
+  },2500);
+
+  /* ============================================================
+     2. DYNAMIC RENDERING OF INTEGRATED SYSTEM PLANS
+     ============================================================ */
+  const plansData={
+    daily:[{name:'Daily Mini',price:'15',cur:'ETB',period:'24 Hrs',data:'450 MB',voice:'25 Min',sms:'20 SMS',featured:false},
+           {name:'Daily Heavy Duty',price:'50',cur:'ETB',period:'24 Hrs',data:'2.5 GB',voice:'Unlimited',sms:'50 SMS',featured:true},
+           {name:'Daily Max Out',price:'90',cur:'ETB',period:'24 Hrs',data:'6 GB',voice:'120 Min',sms:'Unlimited',featured:false}],
+    weekly:[{name:'Weekly Standard',price:'120',cur:'ETB',period:'7 Days',data:'3.2 GB',voice:'150 Min',sms:'100 SMS',featured:false},
+            {name:'Weekly Super Streamer',price:'250',cur:'ETB',period:'7 Days',data:'10 GB',voice:'300 Min',sms:'200 SMS',featured:true},
+            {name:'Weekly Corporate Lite',price:'450',cur:'ETB',period:'7 Days',data:'25 GB',voice:'Unlimited',sms:'Unlimited',featured:false}],
+    monthly:[{name:'Monthly Classic',price:'500',cur:'ETB',period:'30 Days',data:'15 GB',voice:'600 Min',sms:'300 SMS',featured:false},
+             {name:'Monthly Ultimate Premium',price:'1000',cur:'ETB',period:'30 Days',data:'45 GB',voice:'Unlimited',sms:'600 SMS',featured:true},
+             {name:'Monthly Executive Grid',price:'1900',cur:'ETB',period:'30 Days',data:'110 GB',voice:'Unlimited',sms:'Unlimited',featured:false}]
+  };
+
+  const plansGrid=document.getElementById('plansGrid');
+  function renderPlans(tab){
+    plansGrid.innerHTML='';
+    plansData[tab].forEach((p,i)=>{
+      const card=document.createElement('div'); card.className='plan-card'+(p.featured?' featured':'');
+      card.innerHTML=`
+        <div class="plan-name">${p.name}</div>
+        <div class="plan-price"><span class="currency">${p.cur}</span>${p.price}</div>
+        <div class="plan-period">${p.period}</div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> ${p.data} data</li>
+          <li><i class="fas fa-check"></i> ${p.voice} voice allocation</li>
+          <li><i class="fas fa-check"></i> ${p.sms} bound</li>
+          <li><i class="fas fa-check"></i> Free telebirr execution portal</li>
+        </ul>
+        <button class="btn ${p.featured?'btn-primary':'btn-ghost'} plan-btn mt-6" onclick="toast('Package purchase active! Confirmation SMS dispatched shortly.')">Activate Bundle</button>
+      `;
+      plansGrid.appendChild(card);
+    });
+  }
+  renderPlans('daily');
+  document.querySelectorAll('.plan-tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.plan-tab').forEach(x=>x.classList.remove('active')); t.classList.add('active'); renderPlans(t.dataset.tab);
+    });
+  });
+
+  /* ============================================================
+     3. RECHARGE SIMULATOR VALIDATION AND BREAKDOWN METRICS
+     ============================================================ */
+  const phoneInput=document.getElementById('phoneInput');
+  const amountInput=document.getElementById('amountInput');
+  const bonusSelect=document.getElementById('bonusSelect');
+  const chips=document.querySelectorAll('#amountChips .chip');
+
+  chips.forEach(c=>{
+    c.addEventListener('click',()=>{
+      chips.forEach(x=>x.classList.remove('active')); c.classList.add('active');
+      amountInput.value=c.dataset.val; liveUpdateBreakdown();
+    });
+  });
+
+  function validateEthiopianPhone(num) {
+    const clean=num.replace(/\s+/g, '').replace(/-/g, '');
+    const regex=/^(?:\+251|251|0)?(9|7)\d{8}$/;
+    return regex.test(clean);
+  }
+
+  function liveUpdateBreakdown() {
+    const rawPhone=phoneInput.value.trim();
+    const rawAmt=parseFloat(amountInput.value) || 0;
+    const bonusVal=parseInt(bonusSelect.value) || 0;
+
+    // Element references
+    const bdPhone=document.getElementById('bdPhone');
+    const bdAmount=document.getElementById('bdAmount');
+    const bdBonus=document.getElementById('bdBonus');
+    const bdData=document.getElementById('bdData');
+    const bdTotal=document.getElementById('bdTotal');
+
+    bdPhone.textContent=rawPhone ? rawPhone : "09xx xxx xxx";
+    bdAmount.textContent=`ETB ${rawAmt.toFixed(2)}`;
+    bdBonus.textContent=`+${bonusVal}% Pack`;
+
+    // Dynamic scale algorithm estimation of data volume matching standard pricing limits
+    let projectedData=(rawAmt * 0.03) * (1 + (bonusVal / 100));
+    bdData.textContent=rawAmt > 0 ? `${projectedData.toFixed(2)} GB` : '0 GB';
+    bdTotal.textContent=`ETB ${rawAmt.toFixed(2)}`;
+  }
+  // Initialize with fallback selection matching UI active elements
+  amountInput.value = "50";
+  liveUpdateBreakdown();
+
+  function handleRechargeSubmit(e) {
+    e.preventDefault();
+    const phoneVal=phoneInput.value.trim();
+    const amtVal=parseFloat(amountInput.value) || 0;
+
+    let targetValid=true;
+
+    if(!validateEthiopianPhone(phoneVal)){
+      document.getElementById('phoneError').classList.remove('hidden'); targetValid=false;
+    } else {
+      document.getElementById('phoneError').classList.add('hidden');
+    }
+
+    if(amtVal < 5 || amtVal > 5000){
+      document.getElementById('amountError').classList.remove('hidden'); targetValid=false;
+    } else {
+      document.getElementById('amountError').classList.add('hidden');
+    }
+
+    if(targetValid) {
+      const uniqueTxId="TXN: ET-"+Math.random().toString(36).substr(2, 4).toUpperCase()+"-"+Math.random().toString(36).substr(2, 4).toUpperCase()+"-"+Math.random().toString(36).substr(2, 4).toUpperCase();
+      document.getElementById('receiptId').textContent=uniqueTxId;
+      toast(`Recharge execution simulated successfully for ${phoneVal}! Airtime assigned.`);
+    } else {
+      toast("Validation constraints triggered. Please verify configuration boundaries.", "error");
+    }
+  }
+
+  /* ============================================================
+     4. SPEED TEST ANIMATOR ENGINE
+     ============================================================ */
+  function runSpeedTest(){
+    const fill=document.getElementById('gaugeFill'); const val=document.getElementById('gaugeVal');
+    const status=document.getElementById('speedStatus'); const btn=document.getElementById('speedBtn');
+    btn.disabled=true; status.textContent='Running server downstream analysis...'; status.classList.add('active');
+    
+    let current=0; const target=Math.floor(Math.random()*90)+45; const duration=2200; const start=performance.now();
+    function step(now){
+      const progress=Math.min((now-start)/duration,1); const eased=1-Math.pow(1-progress,4);
+      const reading=eased*target; val.textContent=reading.toFixed(1);
+      const dashOffset=754-(754*(reading/150)); fill.style.strokeDashoffset=dashOffset;
+      if(progress<1) requestAnimationFrame(step);
+      else {
+        status.textContent='Speed test completed metrics registered.'; btn.disabled=false;
+        document.getElementById('statPing').textContent=(Math.floor(Math.random()*12)+4)+' ms';
+        document.getElementById('statUpload').textContent=(target*0.35).toFixed(1)+' Mbps';
+        document.getElementById('statJitter').textContent=(Math.random()*2+1).toFixed(1)+' ms';
+        toast('Connection evaluation diagnostic routines finished.');
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ============================================================
+     5. COMPREHENSIVE PORTAL USER SECURITY VALIDATION & MODALS
+     ============================================================ */
+  function openAuthModal(mode) {
+    if(mode==='signup') document.getElementById('signupModal').classList.add('open');
+    if(mode==='login') document.getElementById('loginModal').classList.add('open');
+  }
+
+  function closeAuthModal(mode) {
+    if(mode==='signup') document.getElementById('signupModal').classList.remove('open');
+    if(mode==='login') document.getElementById('loginModal').classList.remove('open');
+  }
+
+  function switchAuthModal(closeMode, openMode) {
+    closeAuthModal(closeMode); openAuthModal(openMode);
+  }
+
+  function analyzePasswordStrength(pass) {
+    const bar=document.getElementById('suPasswordBar');
+    let strength=0;
+    if(pass.length >= 8) strength += 25;
+    if(/[A-Z]/.test(pass)) strength += 25;
+    if(/[0-9]/.test(pass)) strength += 25;
+    if(/[^A-Za-z0-9]/.test(pass)) strength += 25;
+
+    bar.style.width=strength+'%';
+    if(strength <= 50) bar.style.backgroundColor='var(--red)';
+    else if(strength <= 75) bar.style.backgroundColor='var(--gold)';
+    else bar.style.backgroundColor='var(--green)';
+  }
+
+  function handleSignUpSubmit(e) {
+    e.preventDefault();
+    const name=document.getElementById('suName').value.trim();
+    const email=document.getElementById('suEmail').value.trim();
+    const phone=document.getElementById('suPhone').value.trim();
+    const pass=document.getElementById('suPassword').value;
+
+    let valid=true;
+
+    if(!name) { document.getElementById('suNameError').classList.remove('hidden'); valid=false; }
+    else document.getElementById('suNameError').classList.add('hidden');
+
+    if(!email.includes('@') || email.length < 5) { document.getElementById('suEmailError').classList.remove('hidden'); valid=false; }
+    else document.getElementById('suEmailError').classList.add('hidden');
+
+    if(!validateEthiopianPhone(phone)) { document.getElementById('suPhoneError').classList.remove('hidden'); valid=false; }
+    else document.getElementById('suPhoneError').classList.add('hidden');
+
+    if(pass.length < 8) { document.getElementById('suPasswordError').classList.remove('hidden'); valid=false; }
+    else document.getElementById('suPasswordError').classList.add('hidden');
+
+    if(valid) {
+      closeAuthModal('signup'); toggleUserPortalActiveState(name);
+      toast(`Registration secured. Welcome ${name} to ethio telecom portal.`);
+    }
+  }
+
+  function handleLoginSubmit(e) {
+    e.preventDefault();
+    const email=document.getElementById('logEmail').value.trim();
+    const pass=document.getElementById('logPassword').value;
+
+    let valid=true;
+    if(!email.includes('@')) { document.getElementById('logEmailError').classList.remove('hidden'); valid=false; }
+    else document.getElementById('logEmailError').classList.add('hidden');
+
+    if(!pass) { document.getElementById('logPasswordError').classList.remove('hidden'); valid=false; }
+    else document.getElementById('logPasswordError').classList.add('hidden');
+
+    if(valid) {
+      closeAuthModal('login');
+      const standardUserPrefix=email.split('@')[0];
+      toggleUserPortalActiveState(standardUserPrefix.charAt(0).toUpperCase() + standardUserPrefix.slice(1));
+      toast('Welcome back! Secured operational layer established.');
+    }
+  }
+
+  function toggleUserPortalActiveState(username) {
+    document.getElementById('loginNavBtn').style.display='none';
+    document.getElementById('signUpNavBtn').style.display='none';
+    document.getElementById('userProfileActive').style.display='flex';
+    document.getElementById('portalUserName').textContent=username;
+  }
+
+  function handleLogout() {
+    document.getElementById('loginNavBtn').style.display='inline-flex';
+    document.getElementById('signUpNavBtn').style.display='inline-flex';
+    document.getElementById('userProfileActive').style.display='none';
+    toast('Profile cleared safely. Portal session closed.');
+  }
+
+  /* ============================================================
+     6. CANVAS HERO INTERACTIVE ABSTRACT LINKS SIMULATOR
+     ============================================================ */
+  const canvas=document.getElementById('netCanvas'); const ctx=canvas.getContext('2d');
+  let w,h; function resize(){ w=canvas.width=canvas.offsetWidth; h=canvas.height=canvas.offsetHeight; }
+  window.addEventListener('resize',resize); resize();
+
+  const networkPoints=[];
+  for(let i=0; i<45; i++) {
+    networkPoints.push({x:Math.random()*w, y:Math.random()*h, vx:(Math.random()*0.6-0.3), vy:(Math.random()*0.6-0.3), r:Math.random()*2+1.5});
+  }
+
+  function drawHeroNetworkAnimation(){
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='rgba(16,224,122,0.1)';
+    networkPoints.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    });
+
+    ctx.lineWidth=0.5;
+    for(let i=0; i<networkPoints.length; i++){
+      for(let j=i+1; j<networkPoints.length; j++){
+        const dx=networkPoints[i].x-networkPoints[j].x; const dy=networkPoints[i].y-networkPoints[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<130){
+          ctx.strokeStyle=`rgba(16,224,122,${0.18*(1-dist/130)})`;
+          ctx.beginPath(); ctx.moveTo(networkPoints[i].x,networkPoints[i].y); ctx.lineTo(networkPoints[j].x,networkPoints[j].y); ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(drawHeroNetworkAnimation);
+  }
+  drawHeroNetworkAnimation();
+
+  /* ============================================================
+     7. MAP HIGHLIGHT INTERACTIVITY HANDLERS
+     ============================================================ */
+  const regions=document.querySelectorAll('.map-region');
+  const items=document.querySelectorAll('.region-stat');
+  regions.forEach(r=>{
+    r.addEventListener('mouseenter',()=>{
+      regions.forEach(x=>x.classList.remove('active')); r.classList.add('active');
+      const reg=r.dataset.region;
+      items.forEach(item=>{
+        if(item.dataset.region===reg){ item.classList.add('active'); item.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+        else item.classList.remove('active');
+      });
+    });
+  });
+</script>
+</body>
+</html>
